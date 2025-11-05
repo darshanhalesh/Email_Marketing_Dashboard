@@ -8,5 +8,17 @@ export default defineConfig({
     fs: {
       strict: false
     }
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'chart-vendor': ['recharts'],
+          'ui-vendor': ['@heroicons/react']
+        }
+      }
+    },
+    chunkSizeWarningLimit: 500
   }
 })
