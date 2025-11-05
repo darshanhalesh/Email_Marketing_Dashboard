@@ -14,7 +14,7 @@ A modern, responsive email marketing dashboard built with React, TypeScript, and
 ## Tech Stack
 
 - React
-- TypeScript
+
 - Tailwind CSS
 - Vite
 - ESLint
@@ -23,7 +23,7 @@ A modern, responsive email marketing dashboard built with React, TypeScript, and
 
 ### Prerequisites
 
-- Node.js (v14 or higher)
+- react
 - npm or yarn
 
 ### Installation
