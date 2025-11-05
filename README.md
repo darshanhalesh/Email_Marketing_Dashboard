@@ -5,7 +5,7 @@ This project is a **fully responsive Email Marketing Dashboard** built using **R
 It visualizes email campaign performance, engagement metrics, subscriber data, and provides quick-access actions.  
 The dashboard is part of the **Frontend Developer Assessment** by **Globo Persona**.
 
-> 🧩 Live Demo: [https://extraordinary-cucurucho-196a57.netlify.app/](https://extraordinary-cucurucho-196a57.netlify.app/)  
+> 🧩 Live Demo: [https://email-marketing-dashboard-5ir1.vercel.app/](https://email-marketing-dashboard-5ir1.vercel.app/)  
 > 💻 GitHub Repo: [https://github.com/darshanhalesh/Email_Marketing_Dashboard](https://github.com/darshanhalesh/Email_Marketing_Dashboard)
 
 ---
