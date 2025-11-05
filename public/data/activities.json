@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "text": "Campaign \"Autumn Promo\" updated",
+    "timestamp": "2025-10-30T14:23:00Z"
+  },
+  {
+    "id": 2,
+    "text": "New subscriber: john.doe@example.com",
+    "timestamp": "2025-10-30T12:15:00Z"
+  },
+  {
+    "id": 3,
+    "text": "Segment \"VIP Customers\" refined",
+    "timestamp": "2025-10-30T09:45:00Z"
+  },
+  {
+    "id": 4,
+    "text": "Campaign \"Summer Sale 2025\" went live",
+    "timestamp": "2025-10-28T08:00:00Z"
+  }
+]

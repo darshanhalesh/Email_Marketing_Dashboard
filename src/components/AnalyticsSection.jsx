@@ -52,9 +52,9 @@ function AnalyticsSection() {
       
       try {
         const [campaignsRes, activitiesRes, engagementRes] = await Promise.all([
-          fetch('/src/data/campaigns.json'),
-          fetch('/src/data/activities.json'),
-          fetch('/src/data/engagement.json')
+          fetch('/data/campaigns.json'),
+          fetch('/data/activities.json'),
+          fetch('/data/engagement.json')
         ])
         
         const campaignsData = await campaignsRes.json()
