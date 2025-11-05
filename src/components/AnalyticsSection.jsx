@@ -52,39 +52,52 @@ function AnalyticsSection() {
       setError(null)
       
       try {
-        // First, check if we can access the data directory
-        const testRes = await fetch('/data/')
-        console.log('Data directory access test:', testRes.status, testRes.statusText);
+        const urls = [
+          '/data/campaigns.json',
+          '/data/activities.json',
+          '/data/engagement.json'
+        ];
+        
+        console.log('Attempting to fetch data from:', urls);
 
-        const [campaignsRes, activitiesRes, engagementRes] = await Promise.all([
-          fetch('/data/campaigns.json').then(async (res) => {
-            if (!res.ok) throw new Error(`Failed to fetch campaigns: ${res.status} ${res.statusText}`);
-            return res;
+        const [campaignsRes, activitiesRes, engagementRes] = await Promise.all(
+          urls.map(url => 
+            fetch(url, {
+              headers: {
+                'Accept': 'application/json',
+                'Cache-Control': 'no-cache'
+              }
+            }).then(async (res) => {
+              if (!res.ok) {
+                console.error(`Failed to fetch ${url}:`, res.status, res.statusText);
+                throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
+              }
+              return res;
+            })
+          )
+        );
+
+        console.log('Responses received successfully');
+
+        const [campaignsData, activitiesData, engagementData] = await Promise.all([
+          campaignsRes.json().catch(e => {
+            console.error('Failed to parse campaigns data:', e);
+            throw new Error('Failed to parse campaigns data: ' + e.message);
           }),
-          fetch('/data/activities.json').then(async (res) => {
-            if (!res.ok) throw new Error(`Failed to fetch activities: ${res.status} ${res.statusText}`);
-            return res;
+          activitiesRes.json().catch(e => {
+            console.error('Failed to parse activities data:', e);
+            throw new Error('Failed to parse activities data: ' + e.message);
           }),
-          fetch('/data/engagement.json').then(async (res) => {
-            if (!res.ok) throw new Error(`Failed to fetch engagement: ${res.status} ${res.statusText}`);
-            return res;
+          engagementRes.json().catch(e => {
+            console.error('Failed to parse engagement data:', e);
+            throw new Error('Failed to parse engagement data: ' + e.message);
           })
-        ])
+        ]);
         
-        console.log('Responses received:', {
-          campaigns: campaignsRes.status,
-          activities: activitiesRes.status,
-          engagement: engagementRes.status
-        });
-
-        const campaignsData = await campaignsRes.json()
-        const activitiesData = await activitiesRes.json()
-        const engagementData = await engagementRes.json()
-        
-        console.log('Data parsed successfully:', {
-          campaigns: campaignsData?.length,
-          activities: activitiesData?.length,
-          engagement: engagementData?.length
+        console.log('Data parsed:', {
+          campaigns: Array.isArray(campaignsData) ? campaignsData.length : 'not an array',
+          activities: Array.isArray(activitiesData) ? activitiesData.length : 'not an array',
+          engagement: Array.isArray(engagementData) ? engagementData.length : 'not an array'
         });
         
         if (!Array.isArray(campaignsData)) throw new Error('Campaigns data is not an array');
