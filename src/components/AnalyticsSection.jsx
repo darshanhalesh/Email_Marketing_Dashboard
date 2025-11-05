@@ -42,30 +42,65 @@ function AnalyticsSection() {
   const [activities, setActivities] = useState([])
   const [engagement, setEngagement] = useState([])
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
   const [modalOpen, setModalOpen] = useState(false)
   const [modalTitle, setModalTitle] = useState('')
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true)
-      await new Promise(resolve => setTimeout(resolve, 800))
+      setError(null)
       
       try {
+        // First, check if we can access the data directory
+        const testRes = await fetch('/data/')
+        console.log('Data directory access test:', testRes.status, testRes.statusText);
+
         const [campaignsRes, activitiesRes, engagementRes] = await Promise.all([
-          fetch('/data/campaigns.json'),
-          fetch('/data/activities.json'),
-          fetch('/data/engagement.json')
+          fetch('/data/campaigns.json').then(async (res) => {
+            if (!res.ok) throw new Error(`Failed to fetch campaigns: ${res.status} ${res.statusText}`);
+            return res;
+          }),
+          fetch('/data/activities.json').then(async (res) => {
+            if (!res.ok) throw new Error(`Failed to fetch activities: ${res.status} ${res.statusText}`);
+            return res;
+          }),
+          fetch('/data/engagement.json').then(async (res) => {
+            if (!res.ok) throw new Error(`Failed to fetch engagement: ${res.status} ${res.statusText}`);
+            return res;
+          })
         ])
         
+        console.log('Responses received:', {
+          campaigns: campaignsRes.status,
+          activities: activitiesRes.status,
+          engagement: engagementRes.status
+        });
+
         const campaignsData = await campaignsRes.json()
         const activitiesData = await activitiesRes.json()
         const engagementData = await engagementRes.json()
         
+        console.log('Data parsed successfully:', {
+          campaigns: campaignsData?.length,
+          activities: activitiesData?.length,
+          engagement: engagementData?.length
+        });
+        
+        if (!Array.isArray(campaignsData)) throw new Error('Campaigns data is not an array');
+        if (!Array.isArray(activitiesData)) throw new Error('Activities data is not an array');
+        if (!Array.isArray(engagementData)) throw new Error('Engagement data is not an array');
+
         setCampaigns(campaignsData)
         setActivities(activitiesData)
         setEngagement(engagementData)
       } catch (error) {
         console.error('Error loading analytics data:', error)
+        console.error('Error details:', {
+          message: error.message,
+          stack: error.stack
+        })
+        setError(error.message)
       } finally {
         setLoading(false)
       }
@@ -82,6 +117,21 @@ function AnalyticsSection() {
   const closeModal = () => {
     setModalOpen(false)
     setModalTitle('')
+  }
+
+  if (error) {
+    return (
+      <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-red-700">
+        <h3 className="text-lg font-semibold">Error Loading Data</h3>
+        <p className="mt-1">{error}</p>
+        <button 
+          onClick={() => window.location.reload()} 
+          className="mt-3 rounded bg-red-100 px-4 py-2 hover:bg-red-200"
+        >
+          Retry
+        </button>
+      </div>
+    )
   }
 
   if (loading) {

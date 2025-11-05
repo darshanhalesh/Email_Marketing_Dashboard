@@ -19,6 +19,9 @@ export default defineConfig({
         }
       }
     },
-    chunkSizeWarningLimit: 500
-  }
+    chunkSizeWarningLimit: 500,
+    assetsDir: 'assets',
+    copyPublicDir: true
+  },
+  base: '/'
 })
