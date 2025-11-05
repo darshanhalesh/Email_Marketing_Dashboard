@@ -1,96 +1,68 @@
-# Email Marketing Dashboard
+# 📊 Email Marketing Dashboard (Frontend – React + Tailwind CSS)
 
-A modern, responsive email marketing dashboard built with React, TypeScript, and Tailwind CSS. This application helps manage email campaigns, track analytics, and monitor key performance indicators.
+### 🧠 Overview
+This project is a **fully responsive Email Marketing Dashboard** built using **React (JavaScript)** and **Tailwind CSS**.  
+It visualizes email campaign performance, engagement metrics, subscriber data, and provides quick-access actions.  
+The dashboard is part of the **Frontend Developer Assessment** by **Globo Persona**.
 
-## Features
+> 🧩 Live Demo: [https://email-marketing-dashboard-tau.vercel.app/](https://email-marketing-dashboard-tau.vercel.app/)  
+> 💻 GitHub Repo: [https://github.com/darshanhalesh/Email_Marketing_Dashboard](https://github.com/darshanhalesh/Email_Marketing_Dashboard)
 
-- 📊 Real-time analytics and KPI tracking
-- 📧 Email campaign management
-- 📋 Master list and email list management
-- 📈 Campaign performance metrics
-- 📱 Responsive design with modern UI
-- 📉 Engagement tracking and analytics
+---
 
-## Tech Stack
+## ⚙️ Tech Stack
 
-- React
+| Category | Technology |
+|-----------|-------------|
+| Framework | React (JavaScript) |
+| Styling | Tailwind CSS |
+| Icons | Lucide React |
+| Data | Mock JSON / Static state |
+| Charts | Recharts (for visualization) |
+| State Management | React Hooks (`useState`, `useEffect`) |
+| Deployment | Vercel |
+| Build Tool | Vite |
 
-- Tailwind CSS
-- Vite
-- ESLint
+---
 
-## Getting Started
+## 🧩 Features
 
-### Prerequisites
+### 🌐 Layout
+- Sidebar with navigation links: **Dashboard**, **Email Lists**, **Email Accounts**, **Email Campaign**, **Analytics**, **Master List**
+- Topbar with:
+  - Left: “Dashboard Overview”
+  - Center: “Welcome back, Darshan K H”
+  - Right: System status — 🟢 “All systems operational” + “+ 4 14 options operational”
 
-- react
-- npm or yarn
+---
 
-### Installation
+### 📊 Dashboard Sections
 
-1. Clone the repository:
-```bash
-git clone [your-repository-url]
-cd email-marketing-dashboard
-```
+#### 1️⃣ KPI Metrics (Top Row)
+- Cards: Active Subscribers, Revenue Generated, Text Campaigns, Average Open Rate, Bounce Rate
+- Animated progress bars built with Tailwind utilities.
 
-2. Install dependencies:
-```bash
-npm install
-# or
-yarn install
-```
+#### 2️⃣ Analytics Section (Two Columns)
+**Left Column**
+- **Campaign Performance**: Circular metric showing campaign success rate + recent activities.  
+- **Engagement Trends**: List of key metrics — Email Opens, Link Clicks, Forwards, Unsubscribes — with positive/negative trends.
 
-3. Start the development server:
-```bash
-npm run dev
-# or
-yarn dev
-```
+**Right Column**
+- **Quick Actions**: Cards for Create Campaign, Browse Templates, View Analytics, and Segment Lists with action buttons.  
+- **Recent Campaigns**: Summary cards with recipients, opens, and revenue.
 
-The application will be available at `http://localhost:5173`
+#### 3️⃣ Campaign Table
+- Search bar (`Search campaigns…`)
+- Table columns: Status, Recipients, Performance, Revenue, Date, Actions  
+- Pagination (Previous | 1 | 2 | 3 … | Next)
+- Color-coded status badges (Sent, Scheduled, Draft, Active)
 
-## Project Structure
+---
 
-```
-src/
-├── assets/        # Static assets
-├── components/    # Reusable React components
-│   ├── ActionModal.jsx
-│   ├── AnalyticsSection.jsx
-│   ├── CampaignTable.jsx
-│   ├── KPISection.jsx
-│   ├── Sidebar.jsx
-│   └── Topbar.jsx
-├── data/          # Mock data and configurations
-│   ├── activities.json
-│   ├── campaigns.json
-│   ├── engagement.json
-│   └── kpis.json
-└── pages/         # Page components
-    ├── Analytics.jsx
-    ├── Dashboard.jsx
-    ├── EmailAccounts.jsx
-    ├── EmailCampaign.jsx
-    ├── EmailLists.jsx
-    └── MasterList.jsx
-```
-
-## Available Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-- `npm run lint` - Run ESLint
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
+## 🧠 State Management & Data
+All data is local and can be replaced with dynamic data:
+- `kpiCards`, `recentCampaigns`, and `campaignTableData` arrays simulate API responses.
+- Use of React hooks:
+  ```js
+  const [searchQuery, setSearchQuery] = useState('');
+  const [activeNav, setActiveNav] = useState('Dashboard');
