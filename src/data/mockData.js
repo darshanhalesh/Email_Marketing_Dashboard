@@ -96,3 +96,31 @@ export const engagementData = [
     "value": 0.3
   }
 ];
+
+export const kpisData = [
+  {
+    "label": "Active Subscribers",
+    "value": 45231,
+    "progress": 85
+  },
+  {
+    "label": "Revenue Generated",
+    "value": 28450,
+    "progress": 72
+  },
+  {
+    "label": "Text Campaigns",
+    "value": 156,
+    "progress": 90
+  },
+  {
+    "label": "Average Open Rate",
+    "value": "24.8%",
+    "progress": 62
+  },
+  {
+    "label": "Bounce Rate",
+    "value": "2.3%",
+    "progress": 15
+  }
+];

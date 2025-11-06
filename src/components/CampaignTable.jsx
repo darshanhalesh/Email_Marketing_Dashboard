@@ -8,14 +8,13 @@ function CampaignTable() {
   const rowsPerPage = 5
 
   useEffect(() => {
-    const fetchCampaigns = async () => {
+    const loadCampaigns = async () => {
       setLoading(true)
-      await new Promise(resolve => setTimeout(resolve, 800))
+      await new Promise(resolve => setTimeout(resolve, 800)) // Keep loading animation for UX
       
       try {
-        const response = await fetch('/src/data/campaigns.json')
-        const data = await response.json()
-        setCampaigns(data)
+        const { campaignsData } = await import('../data/mockData')
+        setCampaigns(campaignsData)
       } catch (error) {
         console.error('Error loading campaigns:', error)
       } finally {
@@ -23,7 +22,7 @@ function CampaignTable() {
       }
     }
 
-    fetchCampaigns()
+    loadCampaigns()
   }, [])
 
   const filteredCampaigns = useMemo(() => {

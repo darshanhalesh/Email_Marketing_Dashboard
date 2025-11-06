@@ -37,15 +37,14 @@ function KPISection() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const fetchKpis = async () => {
+    const loadKpis = async () => {
       setLoading(true)
-      // Simulate API delay
+      // Simulate API delay for smoother UX
       await new Promise(resolve => setTimeout(resolve, 800))
       
       try {
-        const response = await fetch('/src/data/kpis.json')
-        const data = await response.json()
-        setKpis(data)
+        const { kpisData } = await import('../data/mockData')
+        setKpis(kpisData)
       } catch (error) {
         console.error('Error loading KPIs:', error)
       } finally {
@@ -53,7 +52,7 @@ function KPISection() {
       }
     }
 
-    fetchKpis()
+    loadKpis()
   }, [])
 
   if (loading) {
