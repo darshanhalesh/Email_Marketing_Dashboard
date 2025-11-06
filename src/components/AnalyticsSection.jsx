@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 import { CheckCircleIcon, ChartBarIcon, Squares2X2Icon, UsersIcon, MegaphoneIcon } from '@heroicons/react/24/outline'
 import ActionModal from './ActionModal'
+import { campaignsData, activitiesData, engagementData } from '../data/mockData'
 
 function Section({ title, subtitle, children }) {
   return (
@@ -47,62 +48,18 @@ function AnalyticsSection() {
   const [modalTitle, setModalTitle] = useState('')
 
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true)
-      setError(null)
-      
-      try {
-        const urls = [
-          '/data/campaigns.json',
-          '/data/activities.json',
-          '/data/engagement.json'
-        ];
-        
-        console.log('Attempting to fetch data from:', urls);
-
-        const [campaignsRes, activitiesRes, engagementRes] = await Promise.all(
-          urls.map(url => 
-            fetch(url, {
-              headers: {
-                'Accept': 'application/json',
-                'Cache-Control': 'no-cache'
-              }
-            }).then(async (res) => {
-              if (!res.ok) {
-                console.error(`Failed to fetch ${url}:`, res.status, res.statusText);
-                throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
-              }
-              return res;
-            })
-          )
-        );
-
-        console.log('Responses received successfully');
-
-        const [campaignsData, activitiesData, engagementData] = await Promise.all([
-          campaignsRes.json().catch(e => {
-            console.error('Failed to parse campaigns data:', e);
-            throw new Error('Failed to parse campaigns data: ' + e.message);
-          }),
-          activitiesRes.json().catch(e => {
-            console.error('Failed to parse activities data:', e);
-            throw new Error('Failed to parse activities data: ' + e.message);
-          }),
-          engagementRes.json().catch(e => {
-            console.error('Failed to parse engagement data:', e);
-            throw new Error('Failed to parse engagement data: ' + e.message);
-          })
-        ]);
-        
-        console.log('Data parsed:', {
-          campaigns: Array.isArray(campaignsData) ? campaignsData.length : 'not an array',
-          activities: Array.isArray(activitiesData) ? activitiesData.length : 'not an array',
-          engagement: Array.isArray(engagementData) ? engagementData.length : 'not an array'
-        });
-        
-        if (!Array.isArray(campaignsData)) throw new Error('Campaigns data is not an array');
-        if (!Array.isArray(activitiesData)) throw new Error('Activities data is not an array');
-        if (!Array.isArray(engagementData)) throw new Error('Engagement data is not an array');
+    setLoading(true);
+    try {
+      // Using imported mock data directly
+      setCampaigns(campaignsData);
+      setActivities(activitiesData);
+      setEngagement(engagementData);
+      setError(null);
+    } catch (error) {
+      console.error('Error loading data:', error);
+      setError('Failed to load dashboard data');
+    }
+    setLoading(false);
 
         setCampaigns(campaignsData)
         setActivities(activitiesData)
