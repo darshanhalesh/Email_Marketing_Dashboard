@@ -57,27 +57,15 @@ function AnalyticsSection() {
       setError(null);
     } catch (error) {
       console.error('Error loading data:', error);
+      console.error('Error details:', {
+        message: error.message,
+        stack: error.stack
+      });
       setError('Failed to load dashboard data');
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
-
-        setCampaigns(campaignsData)
-        setActivities(activitiesData)
-        setEngagement(engagementData)
-      } catch (error) {
-        console.error('Error loading analytics data:', error)
-        console.error('Error details:', {
-          message: error.message,
-          stack: error.stack
-        })
-        setError(error.message)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchData()
-  }, [])
+  }, []);
 
   const openModal = (title) => {
     setModalTitle(title)
