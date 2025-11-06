@@ -5,10 +5,16 @@ This project is a **fully responsive Email Marketing Dashboard** built using **R
 It visualizes email campaign performance, engagement metrics, subscriber data, and provides quick-access actions.  
 The dashboard is part of the **Frontend Developer Assessment** by **Globo Persona**.
 
-> 🧩 Live Demo: [https://email-marketing-dashboard-5ir1.vercel.app/](https://email-marketing-dashboard-5ir1.vercel.app/)  
+> 🧩 Live Demo: [https://email-marketing-dashboard-5ir1-git-6b877e-darshan-k-hs-projects.vercel.app/](https://email-marketing-dashboard-5ir1-git-6b877e-darshan-k-hs-projects.vercel.app/)  
 > 💻 GitHub Repo: [https://github.com/darshanhalesh/Email_Marketing_Dashboard](https://github.com/darshanhalesh/Email_Marketing_Dashboard)
 
 ---
+
+<img width="1920" height="1080" alt="Screenshot (29)" src="https://github.com/user-attachments/assets/6b02a0e3-fb1c-47fe-8879-c08329525e65" />
+<img width="1920" height="1080" alt="Screenshot (30)" src="https://github.com/user-attachments/assets/75f403b0-d54e-4c38-a44d-a62026413413" />
+<img width="1920" height="1080" alt="Screenshot (31)" src="https://github.com/user-attachments/assets/cf9a399d-548f-4252-b7bc-2e156882a960" />
+<img width="1920" height="1080" alt="Screenshot (32)" src="https://github.com/user-attachments/assets/22215047-2a7a-4f34-8bb5-10e8697eb02a" />
+
 
 ## ⚙️ Tech Stack
 
